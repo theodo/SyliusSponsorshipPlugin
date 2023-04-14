@@ -1,0 +1,16 @@
+services:
+    # Default configuration for services in *this* file
+    _defaults:
+        # Automatically injects dependencies in your services
+        autowire: true
+
+        # Automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+
+        public: true
+
+
+    sylius_sponsorship_plugin.user.registration_listener:
+        class: Acme\SyliusSponsorshipPlugin\EventListener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.customer.post_register, method: createPromotionCoupon }
