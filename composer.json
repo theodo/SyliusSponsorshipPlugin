@@ -59,8 +59,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "Acme\\SyliusSponsorshipPlugin\\": "src/",
+            "Tests\\Acme\\SyliusSponsorshipPlugin\\": "tests/"
         }
     },
     "autoload-dev": {
