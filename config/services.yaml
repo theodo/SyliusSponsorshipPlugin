@@ -1,3 +1,9 @@
+# imports:
+#     - { resource: sylius_fixtures.yml }
+
+parameters:
+    sylius_sponsorship_plugin.promotion_code: 'SPONSORSHIP'
+
 services:
     # Default configuration for services in *this* file
     _defaults:
@@ -12,5 +18,7 @@ services:
 
     sylius_sponsorship_plugin.user.registration_listener:
         class: Acme\SyliusSponsorshipPlugin\EventListener\UserRegistrationListener
+        arguments:
+            $promotionCode: '%sylius_sponsorship_plugin.promotion_code%'
         tags:
             - { name: kernel.event_listener, event: sylius.customer.post_register, method: createPromotionCoupon }
