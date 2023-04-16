@@ -11,3 +11,11 @@ sylius_fixtures:
                                 channels:
                                     - 'FASHION_WEB'
                                 coupon_based: true
+                                rules:
+                                    -   type: "nth_order"
+                                        configuration:
+                                            nth: "1"
+                                actions: 
+                                    -   type: order_percentage_discount
+                                        configuration:
+                                            percentage: 30
