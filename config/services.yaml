@@ -3,6 +3,7 @@
 
 parameters:
     sylius_sponsorship_plugin.promotion_code: 'SPONSORSHIP'
+    sylius_sponsorship_plugin.usage_limit: 5
 
 services:
     # Default configuration for services in *this* file
@@ -20,5 +21,6 @@ services:
         class: Acme\SyliusSponsorshipPlugin\EventListener\UserRegistrationListener
         arguments:
             $promotionCode: '%sylius_sponsorship_plugin.promotion_code%'
+            $usageLimit: '%sylius_sponsorship_plugin.usage_limit%'
         tags:
             - { name: kernel.event_listener, event: sylius.customer.post_register, method: createPromotionCoupon }

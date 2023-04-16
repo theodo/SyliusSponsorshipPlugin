@@ -13,14 +13,15 @@ final class UserRegistrationListener {
         private PromotionCouponFactoryInterface $promotionCouponFactory,
         private PromotionRepositoryInterface $promotionRepository,
         private string $promotionCode,
+        private int $usageLimit,
     ) {
     }
     public function createPromotionCoupon() {
         /** @var PromotionInterface $promotion */
         $promotion = $this->promotionRepository->findOneBy(['code' => $this->promotionCode]);
         $coupon = $this->promotionCouponFactory->createForPromotion($promotion);
-        $myVariable = true;
-        return $myVariable;
+        $coupon->setUsageLimit($this->usageLimit);
+        return $coupon;
     }
 
 }
