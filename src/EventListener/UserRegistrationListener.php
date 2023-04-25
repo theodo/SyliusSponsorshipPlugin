@@ -9,8 +9,12 @@ use Sylius\Component\Core\Model\PromotionCoupon;
 use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\String\ByteString;
+use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener {
     public function __construct(
@@ -20,14 +24,23 @@ final class UserRegistrationListener {
         private EntityManagerInterface $entityManager,
         private string $promotionCode,
         private int $usageLimit,
+        private CustomerContextInterface $customerContext,
     ) {
     }
-    public function createPromotionCoupon() {
+    public function createPromotionCoupon(GenericEvent $event) {
+        $customer = $event->getSubject();
+        Assert::isInstanceOf($customer, CustomerInterface::class);
+
+        $user = $customer->getUser();
+
+        Assert::notNull($user);
+        $user = $customer->getUser();
         /** @var PromotionInterface $promotion */
         $promotion = $this->promotionRepository->findOneBy(['code' => $this->promotionCode]);
         $coupon = $this->promotionCouponFactory->createForPromotion($promotion);
         $coupon->setUsageLimit($this->usageLimit);
         $coupon->setCode($this->getUniqueCode());
+        $user->setSponsorshipCoupon($coupon);
         $this->entityManager->persist($coupon);
         $this->entityManager->flush();
         return $coupon;
