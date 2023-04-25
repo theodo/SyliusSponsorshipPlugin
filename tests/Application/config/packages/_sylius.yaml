@@ -16,3 +16,12 @@ sylius_shop:
 
 sylius_api:
     enabled: true
+
+
+sylius_user:
+    resources:
+        shop:
+            user:
+                classes:
+                    model: App\Entity\User\ShopUser
+

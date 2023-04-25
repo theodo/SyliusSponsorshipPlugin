@@ -9,7 +9,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 trait SponsorshipShopUserTrait {
 
     /**
-     * @ORM\OneToOne(targetEntity="Acme\SyliusSponsorshipPlugin\Model\SponsorshipPromotionCouponInterface", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Sylius\Component\Core\Model\PromotionCouponInterface", cascade={"persist"})
      * @ORM\JoinColumn(name="sponsorship_coupon_id", nullable=true)
      */
     private ?PromotionCouponInterface $sponsorshipCoupon = null;
