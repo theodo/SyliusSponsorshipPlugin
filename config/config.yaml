@@ -19,3 +19,11 @@ sylius_fixtures:
                                     -   type: order_percentage_discount
                                         configuration:
                                             percentage: 30
+
+sylius_ui:
+    events:
+        sylius.shop.register.form:
+            blocks:
+                after_legacy:
+                    template: "@AcmeSyliusSponsorshipPlugin/Register/_sponsor.html.twig"
+                    priority: 1
