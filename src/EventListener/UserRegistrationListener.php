@@ -35,15 +35,10 @@ final class UserRegistrationListener {
 
         Assert::notNull($user);
         $user = $customer->getUser();
-        /** @var PromotionInterface $promotion */
-        $promotion = $this->promotionRepository->findOneBy(['code' => $this->promotionCode]);
-        $coupon = $this->promotionCouponFactory->createForPromotion($promotion);
-        $coupon->setUsageLimit($this->usageLimit);
-        $coupon->setCode($this->getUniqueCode());
-        $user->setSponsorshipCoupon($coupon);
-        $this->entityManager->persist($coupon);
+        $uniqueCode = $this->getUniqueCode();
+        $user->setSponsorshipCoupon($uniqueCode);
         $this->entityManager->flush();
-        return $coupon;
+        return;
     }
 
     private function getUniqueCode(): string
