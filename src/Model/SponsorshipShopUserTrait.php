@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace Acme\SyliusSponsorshipPlugin\Model;
 
-use Sylius\Component\Core\Model\PromotionCouponInterface;
-
 trait SponsorshipShopUserTrait {
 
-    /**
-     * @ORM\OneToOne(targetEntity="Sylius\Component\Core\Model\PromotionCouponInterface", cascade={"persist"})
-     * @ORM\JoinColumn(name="sponsorship_coupon_id", nullable=true)
-     */
-    private ?PromotionCouponInterface $sponsorshipCoupon = null;
+    /** @ORM\Column(type="string", nullable=true, name="sponsorship_coupon") */
+    private ?string $sponsorshipCoupon = null;
 
-    public function setSponsorshipCoupon(?PromotionCouponInterface $sponsorshipCoupon): void
+    public function setSponsorshipCoupon(?string $sponsorshipCoupon): void
     {
         $this->sponsorshipCoupon = $sponsorshipCoupon;
     }
 
-    public function getSponsorshipCoupon(): ?PromotionCouponInterface
+    public function getSponsorshipCoupon(): ?string
     {
         return $this->sponsorshipCoupon;
     }
