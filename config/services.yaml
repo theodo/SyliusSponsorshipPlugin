@@ -24,3 +24,20 @@ services:
             $usageLimit: '%sylius_sponsorship_plugin.usage_limit%'
         tags:
             - { name: kernel.event_listener, event: sylius.customer.post_register, method: createPromotionCoupon }
+
+    app.form.type.customer_sponsorship_registration:
+        class: Acme\SyliusSponsorshipPlugin\Form\CustomerSponsorshipRegistrationType
+        arguments:
+            - '%sylius.model.customer.class%'
+            - '%sylius.form.type.customer_registration.validation_groups%'
+            - 'sylius.repository.customer'
+        tags:
+            - { name: form.type }
+
+    app.form.type.sponsor_type:
+        class: Acme\SyliusSponsorshipPlugin\Form\SponsorType
+        arguments:
+            - '%sylius.model.shop_user.class%'
+            - '%sylius.form.type.customer_registration.validation_groups%'
+        tags:
+            - { name: form.type }
