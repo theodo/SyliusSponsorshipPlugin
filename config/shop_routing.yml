@@ -11,3 +11,16 @@ acme_sylius_example_dynamic_welcome:
     defaults:
         _controller: Acme\SyliusSponsorshipPlugin\Controller\GreetingController::dynamicallyGreetAction
         name: ~
+
+sylius_shop_register:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer::createAction
+        _sylius:
+            template: "@SyliusShop/register.html.twig"
+            form: Acme\SyliusSponsorshipPlugin\Form\CustomerSponsorshipRegistrationType
+            event: register
+            redirect:
+                route: sylius_shop_account_dashboard
+            flash: sylius.customer.register
