@@ -41,3 +41,6 @@ services:
             - '%sylius.form.type.customer_registration.validation_groups%'
         tags:
             - { name: form.type }
+    
+    Acme\SyliusSponsorshipPlugin\Form\Constraints\SponsorshipCouponConstraintValidator:
+        autowire: true
