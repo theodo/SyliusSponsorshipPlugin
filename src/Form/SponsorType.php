@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Acme\SyliusSponsorshipPlugin\Form;
 
+use Acme\SyliusSponsorshipPlugin\Form\Constraints\SponsorshipCouponConstraint;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,11 @@ final class SponsorType extends AbstractResourceType
                 'label' => 'sylius_sponsorship_plugin.ui.coupon',
                 'mapped' => false,
                 'required' => false,
+                'constraints' => [
+                    new SponsorshipCouponConstraint(
+                        ['sylius'],
+                    ),
+                ],
             ]);
     }
 
