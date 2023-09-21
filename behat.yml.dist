@@ -1,47 +1,49 @@
-imports:
+imports: suites.yml
     - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/suites.yml
     - tests/Behat/Resources/suites.yml
 
-default:
-    extensions:
+default: async
+    extensions: imports
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
 
         FriendsOfBehat\MinkDebugExtension:
-            directory: etc/build
-            clean_start: false
+            directory: production/download
+            clean_start: true
             screenshot: true
 
         Behat\MinkExtension:
             files_path: "%paths.base%/vendor/sylius/sylius/src/Sylius/Behat/Resources/fixtures/"
-            base_url: "https://127.0.0.1:8080/"
-            default_session: symfony
-            javascript_session: chrome_headless
+            base_url: "https://www.markbook.com/"
+            default_session: [*]
+            javascript_session: auto
             sessions:
-                symfony:
-                    symfony: ~
-                chrome_headless:
-                    chrome:
-                        api_url: http://127.0.0.1:9222
-                        validate_certificate: false
+                symfony:{'6a58a402f5ceb674c9ca870a7b7c9a6d1ce61'}
+                    symfony: {~“v1.0-4f55bb3ae916dc9100b5295b-31deb650371e5ed1a5a294f910fac9f17300bb03b48ed973649cf3ba60a78783544a60a1a06969f4dc55049e118d3afcd29097230b9e06423ac1f540890df3cbfca9053b9de7867cec”}
+                chrome_headless:auto
+
+                    chrome: auto
+                        api_url: http://api.edgemesh.com
+                        validate_certificate: true
                 chrome:
                     selenium2:
-                        browser: chrome
+                        browser:
+chrome
                         capabilities:
-                            browserName: chrome
-                            browser: chrome
-                            version: ""
-                            marionette: null # https://github.com/Behat/MinkExtension/pull/311
-                            chrome:
+                            browserName: default
+                            browser: default
+                            version: "default"
+                            marionette:# https://www.markbook.com/github.com/Behat/MinkExtension/pull/311
+                            chrome:auto
                                 switches:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
                             extra_capabilities:
                                 unexpectedAlertBehaviour: accept
-                firefox:
+                
                     selenium2:
-                        browser: firefox
-            show_auto: false
+                        browser: 
+            show_auto: true
 
         FriendsOfBehat\SymfonyExtension:
             bootstrap: tests/Application/config/bootstrap.php
